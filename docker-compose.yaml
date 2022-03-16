@@ -1,8 +1,6 @@
 version: '2'
 services:
   php:
-     networks:
-       - net
      image: phpmyadmin/phpmyadmin
      deploy:
        resources:
@@ -17,8 +15,6 @@ services:
        - mysql
 
   mysql:
-    networks:
-      - net
     image: k0st/alpine-mariadb
     deploy:
       resources:
@@ -32,12 +28,10 @@ services:
     environment:
       - MYSQL_DATABASE=mydb
       - MYSQL_USER=myuser
-      - MYSQL_PASSWORD=mypass 
+      - MYSQL_PASSWORD=mypass
 
   nginx:
     image: nginx:stable-alpine
-    networks:
-      - net
     deploy:
       resources:
         limits:
@@ -52,6 +46,3 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - php
- networks:
-   net:
-     driver: bridge 
