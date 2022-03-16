@@ -47,7 +47,7 @@ wordpress:
     ports:
       - "8000:80"
     restart: always
-     deploy:
+    deploy:
       restart_policy:
         condition: on-failure
         delay: 5s
