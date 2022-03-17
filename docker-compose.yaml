@@ -1,6 +1,11 @@
 version: '2'
+networks:
+  net:
+     driver: bridge
 services:
   php:
+     networks:
+       - net
      image: phpmyadmin/phpmyadmin
      deploy:
        resources:
@@ -15,6 +20,8 @@ services:
        - mysql
 
   mysql:
+    networks:
+      - net
     image: k0st/alpine-mariadb
     deploy:
       resources:
@@ -31,6 +38,8 @@ services:
       - MYSQL_PASSWORD=mypass
 
   nginx:
+    networks:
+      - net
     image: nginx:stable-alpine
     deploy:
       resources:
