@@ -2,7 +2,7 @@ Deploying any 3-tier application
 
 We are going to deploy a 3-tier application using docker-compose First task would be to choose application. I’ll deploy PHPMyAdmin web application with MySQL as database and nginx as reverse proxy.
 
-Creating docker-compose.yml
+1. Creating docker-compose.yml
 
 version: '2'
 networks:
@@ -24,7 +24,6 @@ services:
        - mysql:db
      depends_on:
        - mysql
-
   mysql:
     networks:
       - net
@@ -42,7 +41,6 @@ services:
       - MYSQL_DATABASE=mydb
       - MYSQL_USER=myuser
       - MYSQL_PASSWORD=mypass
-
   nginx:
     networks:
       - net
@@ -77,7 +75,6 @@ http {
   sendfile  off;
   server {
     listen 80;
- 
     location / {
       proxy_pass  http://php;
       proxy_set_header Host $host;
@@ -85,9 +82,6 @@ http {
     }
   }
 }
-
-
-
 
 
 Running services using docker-compose
